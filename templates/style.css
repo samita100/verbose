@@ -1,0 +1,122 @@
+*{
+    font-family: 'Big Shoulders Display', cursive;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+}
+.container{
+    cursor: pointer;
+}
+.spinner{
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border: 4px solid #fff1;
+    border-radius: 50%;
+    background-clip: padding-box;
+    transform-origin: 50% 60%;
+    transform: perspective(200px) rotateX(65deg);
+    -webkit-mask: linear-gradient(#0001, #000 90%);
+}
+.container:hover .spinner::before,
+.container:hover .spinner::after{
+    animation-play-state: paused;
+}
+.spinner::before,
+.spinner::after{
+    content: "";
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border: 4px solid #fff1;
+    border-radius: 50%;
+    margin: -4px;
+    border-color: transparent;
+    opacity: 0.5;
+    box-sizing: border-box;
+    animation: run 1s cubic-bezier(0.6,0.3,0,0.8) infinite,
+    run1 1s linear infinite;
+}
+.spinner::before{
+    border-top-color: #c92222;
+}
+.spinner::after{
+    border-top-color: #7931f5;
+    animation-delay: 0.3s;
+}
+@keyframes run{
+    to{
+        transform: rotate(360deg);
+    }
+}
+@keyframes run1{
+    20%{
+        opacity: 0.1;
+    }
+    40%{
+        opacity: 1;
+    }
+    60%{
+        opacity: 0.1;
+    }
+}
+/*---------------------Numbers----------------------*/
+.numbers{
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+.numbers b{
+    font-size: 20px;
+}
+.numbers span{
+    height: 40px;
+    text-align: center;
+    display: inline-block;
+    line-height: 40px;
+    font-size: 40px;
+    overflow: hidden;
+}
+span::before{
+    position: relative;
+    content: "0\A 1\A 2\A 3\A 4\A 5\A 6\A 7\A 8\A 9";
+    white-space: pre;
+}
+span.first::before{
+    animation: text 0.1s steps(10);
+    animation-iteration-count: 10;
+}
+span.second::before{
+    animation: text 1s steps(10);
+}
+span.third::before{
+    animation: text1 10s steps(1);
+}
+@keyframes text{
+    0%{
+        top: 0;
+    }
+    100%{
+        top: -400px;
+    }
+}
+@keyframes text1{
+    0%{
+        top: 0;
+    }
+    10%{
+        top: -40px;
+    }
+}
+.container:hover span::before{
+    animation-play-state: paused;
+}
